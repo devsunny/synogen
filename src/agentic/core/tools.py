@@ -291,32 +291,3 @@ def gather_tools(funcs: List[Callable]) -> List[Dict[str, Any]]:
             tool_metas.append(schema)
 
     return tool_metas, tools_mapping
-
-
-# -----------------------------
-# Example usage & edge cases
-# -----------------------------
-if __name__ == "__main__":
-    from typing import Optional, List, Dict, Literal
-
-    class Unit(enum.Enum):
-        celsius = "celsius"
-        fahrenheit = "fahrenheit"
-
-    def get_weather(
-        context: Dict[str, Any],
-        city: str,
-        unit: Literal["celsius", "fahrenheit"] = "celsius",
-    ):
-        """Get the current weather in a given city"""
-        ...
-
-        # @tool(description="Search the web for recent information")
-        # def get_weather2(city: str, unit: Literal["celsius", "fahrenheit"] = "celsius"):
-        #     """Get the current weather in a given city"""
-        ...
-
-    meta, stateless = function_to_openai_tool(get_weather)
-    import json
-
-    print(json.dumps(meta, indent=2))
