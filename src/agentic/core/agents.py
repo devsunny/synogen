@@ -1,6 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Callable, Dict, Optional, List
+import openai
 from agentic.core.tools import function_to_openai_tool
 
 
@@ -12,6 +13,7 @@ class Agent(ABC):
         name: str = None,
         description: str = None,
         base_url: str = None,
+        openai_client: openai.OpenAI = None,
         api_key: str = None,
         model: str = "qwen3-30b-a3b",
         stream_handler: Optional[Callable] = None,
@@ -23,6 +25,7 @@ class Agent(ABC):
         # Initialize other necessary attributes here
         self.base_url = base_url
         self.api_key = api_key
+        self.client = openai_client or openai.OpenAI(api_key=api_key, base_url=base_url)
         self.model = model
         self.stream_handler = stream_handler
         self.children = children or []
