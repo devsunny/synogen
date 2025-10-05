@@ -4,4 +4,4 @@ version = "0.1.0"
 description = "Synogen is a sophisticated **GenAI agent orchestration engine**"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["openai>=2.1.0"]
+dependencies = ["openai>=1.101.1"]

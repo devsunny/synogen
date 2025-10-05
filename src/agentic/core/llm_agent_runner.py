@@ -72,7 +72,7 @@ class ToolFuser:
         tool_messages[-1]["content"] = json.dumps(result)
         return tool_messages
 
-    def invoke_chat_stream(
+    async def invoke_chat_stream(
         self,
         inputs: List[dict],
         tools: Optional[List[Callable]] = None,
@@ -148,7 +148,7 @@ class ToolFuser:
             )
         return assistant_content
 
-    def invoke_chat(
+    async def invoke_chat(
         self,
         inputs: List[dict],
         tools: Optional[List[Callable]] = None,

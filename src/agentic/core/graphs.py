@@ -112,7 +112,7 @@ class Node:
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 
-class Graph:
+class AgentGraph:
     """
     Executable directed acyclic graph.
     Execution model:
@@ -222,7 +222,10 @@ class Graph:
 
     # ---------- Execution ----------
     def execute(
-        self, initial_context: Optional[Dict[str, Any]] = None
+        self,
+        initial_context: Optional[Dict[str, Any]] = None,
+        messages: List[Dict[str, str]] = None,
+        streaming_callback: Optional[Callable] = None,
     ) -> Dict[str, Any]:
         order = self._topo_order()
         context: Dict[str, Any] = initial_context or {}
@@ -307,10 +310,10 @@ class GraphBuilder:
         return self
 
     # ---- Compile targets ----
-    def compile(self) -> Graph:
+    def compile(self) -> AgentGraph:
         if not self._nodes:
             raise ValueError("Cannot compile an empty graph.")
-        g = Graph(
+        g = AgentGraph(
             nodes=dict(self._nodes),
             edges=list(self._edges),
             start_nodes=list(self._explicit_starts) or None,
